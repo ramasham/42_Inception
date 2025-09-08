@@ -1,0 +1,213 @@
+##what is docker?
+    #Docker:
+        - it is a container engine that uses the Linux Kernel features
+        like namespaces and control groups to create containers on top of an operating system
+        - Docker is a technology or a tool developed to manage containers efficiently
+
+        - Docker was initially built on top of Linux containers (LXC)
+        Later Docker replaced LXC with its container runtime libcontainer (now part of runc)
+
+    - Docker uses a Copy-on-write union file system for its image storage
+        1. Docker Images and Layers
+            - A Docker image is made up of layers.
+            - Each instruction in a Dockerfile (FROM, RUN, COPY, etc.) creates a new read-only layer.
+            - These layers are stacked on top of each other to form the final image
+            
+            So the image is just a stack of read-only layers.
+            - When you start a container from an image, Docker doesn’t copy the whole image.
+            - Instead, it mounts the image layers as read-only and adds a thin writable layer on top (called the container layer)
+        This is where copy-on-write (CoW) comes in.
+        That writable layer is often called the container layer
+        
+        #copy-on-write (CoW):
+            1. Without Copy-on-Write:
+                - Normally, when you "copy" something, the system immediately makes a full duplicate
+            2. With Copy-on-Write:
+                - Instead of copying right away, the system does this:
+                    *It says: "Both copies will just point to the same data for now."
+                    *That means only one real copy exists on disk or in memory.
+                Now:
+                    *If both are just reading, they keep sharing the same data
+                    *If one of them writes/changes something, then the system makes a private copy of just that part and applies the change there
+
+                what is private copy?
+                    -It’s a new version of the data that only this process/container can see and modify.
+                    -The original data (shared among other processes/containers) remains untouched.
+                    -“Private” just means exclusive to the one that made the change.
+                Where is the private copy added?
+                    - In Docker: it goes into the writable layer of the container
+    
+    #Current Docker Architecture Components:
+        - Docker used to be monolithic → now split into Engine, containerd, and runc.
+        1. Docker engine, Docker daemon (dockerd) :
+            - runs continuously as dockerd systemd service
+            - It is responsible for building the docker images.
+            - To manage images and run containers, dockerd calls the docker-containerd APIs.
+        2. containerd :
+            - containerd is another system daemon service
+            - responsible for downloading the docker images and running them as a container
+            - It exposes its API to receive instructions from the dockerd service
+        3. runc : 
+            - is the container runtime responsible for creating the namespaces and cgroups required for a container
+            - It then runs the container commands inside those namespaces
+
+##Database:
+    - A database is a structured collection of data designed for efficient storage, retrieval and manipulation
+    - At the core of every database system is the Database Management System (DBMS):
+        - (DBMS)—a software layer that acts as an intermediary between users and the raw data.
+    # components of database:
+        1. data
+        2. schema : The structural blueprint that defines how data is organized
+        3. DBMS : The software that manages database operations
+        4. queries : Instructions (usually SQL) used to retrieve or manipulate data within the database.
+        5. users
+    
+
+###Nginx:
+    - it is a web server, server the web content to out browser
+    #how web content is served?
+    1. make a request to nginx server
+    2. nginx makes a request to x server (the web i want to reach)
+    3. x responds to nginx server, gives all the content
+    4. nginx sends back the content to the browser
+    Note: this is known as reverse proxy
+
+    #why we need a proxy server?
+    because when we get a lot of traffic, we need to increase
+    the number of servers and nginx solve the problem
+    the client only sends the request to nginx, and
+    nginx is resposible for forwarding the request to an
+    available server
+    this is known as load balancer
+    so nginx can act as load balancer too
+
+
+###SSL & TLS:
+    SSL(Secure Sockets Layer): is a protocl that encrypts data transmitted between
+    computers
+    TLS(trasport layer security) : newer version of SSL, but with better
+    security practices
+    -SSL doesn't exist anymore
+
+    - Websites using SSL/TLS have "HTTPS" in their URL instead of "HTTP."
+    #Working of SSL:
+        1. Encryption
+        2. Authentication:
+            SSL starts an authentication process called a handshake
+            between two devices to confirm their identities,
+            making sure both parties are who they claim to be.
+        3. Data Integrity:
+            SSL digitally signs data
+            digital signatures guarantee:
+            It really came from the sender (authenticity)?
+            It wasn’t changed along the way (integrity)?
+
+            how it works?
+                - Digital signatures use public-key cryptography (asymmetric encryption)
+            Process:
+                1. Sender signs the message:
+                    - Sender takes the message and runs it through a hash function
+                    → Output = a short fixed-size string (the message digest).
+                    - Sender then encrypts this digest with their private key.
+                    → This encrypted digest = digital signature.
+                2. Receiver verifies the signature:
+                    - Receiver takes the original message and also hashes it with the same algorithm
+                    - Receiver decrypts the signature using the sender’s public key.
+                    - If the decrypted digest matches the freshly computed digest → message is authentic and unaltered.
+
+When you type that URL in your browser:
+1. Your request goes to Nginx (container)
+2. Nginx forwards it to WordPress/PHP-FPM (container)
+3. WordPress fetches data from MariaDB (container)
+
+
+command : docker build -t myn .
+    1. dokcer reads the Dockerfile line by line
+    2. FROM nginx:alpine → Docker downloads the official Nginx Alpine image
+    3. COPY conf/nginx.conf … → Docker copies your custom Nginx
+        configuration into the container filesystem.
+    4. COPY index.html … → Docker copies your HTML page into the container’s web root.
+    5. EXPOSE 80 → tells Docker that the container listens on port 80
+    6. CMD ["nginx", "-g", "daemon off;"] → sets the default command the container will run when started.
+    7. After completing all steps, Docker packages everything into a new image called myn
+
+    -t -> short for --tag, used to assign a name
+
+command : docker run -d -p 80:80 myn
+    1. Docker creates a container from your image myn
+    2. -d → runs the container in detached mode
+    3. -p 80:80: -p <host_port>:<container_port>
+        -p --publish -> maps a port on your host machine (your laptop/server) to a port inside the container.
+    Host port (first 80):
+        This is the port on your machine that you can open in a browser
+        http://localhost:80
+    Container port (second 80):
+        This is the port inside the container that the service (Nginx) is listening on.
+    It takes all incoming traffic on host port 80 and forwards it to container port 80.
+
+
+##Docker network:
+    1. User-defined networks:
+        - Once connected to a user-defined network, containers can communicate with each other using
+        container IP addresses or container names.
+    
+    2. Drivers:
+        - bridge
+        - host
+        - none
+        - overlay
+        - ipvlan
+        - macvlan
+
+##health check:
+    - interval --> the period between health checks (default 30s ).
+    - timeout --> the amount of time given to the command to complete (default 30s ).
+    - retries --> the number of consecutive fails before considered unhealthy (default 3 ).
+
+    - in some casses, you may have a container that takes a long
+    time to initially start, which would cause the service to be considered
+    unhealthy using the regular interval settings
+    
+    To change these settings, you can use the following properties:
+    1. start_period
+    2. start_interval
+
+    #test command:
+        - Docker runs this command at intervals you specify (interval), and looks at the exit code
+        # two common format:
+            1. exec form(array)
+                test: ["CMD", "command", "arg1", "arg2"]
+                - CMD tells Docker to run this command inside the container.
+            2. shell form (string)
+                test: CMD command arg1 arg2 || exit 1
+                - Docker runs the string inside /bin/sh -c
+        - "CMD" -> tells the docker to run the command inside the container
+            don't use a shell (/bin/sh) unless you specifically call it
+    
+
+
+##CGI:
+    - Web servers like Nginx or Apache are mainly designed to serve static files:
+    HTML, CSS, javascript, images
+    they can't directly execute programs or scripts like PHP, ..
+    if you want dynamic content the server needs something to process
+    the script --> CGI/FastCGI
+
+    What CGI does?
+    is a protocol that tells the server:
+    “Hey, I can run this program for you and return the output.”
+
+    Request from browser → server → start a new PHP process → run script → return output
+
+    Old CGI works by starting a new process every time:
+    and this is slow and resource-heavy for many requests
+    so the solution was FastCGI:
+        - Keeps long-running processes for scripts
+        - Handles multiple requests without starting a new process every time
+
+
+##Wordpress:
+1. PHP-FPM (PHP FastCGI process manager):
+    - It’s a way to run PHP scripts on a web server efficiently, especially for high-traffic sites
+
+

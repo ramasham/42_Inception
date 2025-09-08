@@ -1,0 +1,12 @@
+# Ignore SSL keys and certs
+srcs/requirements/nginx/ssl/*.key
+srcs/requirements/nginx/ssl/*.crt
+
+# Ignore temporary / cache files
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# Ignore docker-related junk
+**/.env
