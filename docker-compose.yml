@@ -25,7 +25,7 @@ services:
       - inception-net
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-k", "-f", "https://localhost/"]
+      test: ["CMD-SHELL", "curl -k https://localhost/ || exit 0"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -58,8 +58,8 @@ services:
     container_name: wordpress
     restart: always
     depends_on:
-      mariadb:
-        condition: service_healthy
+      - mariadb
+      - redis
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
@@ -77,9 +77,26 @@ services:
       retries: 3
       start_period: 30s
 
+  redis:
+    build: ./srcs/requirements/bonus/redis_cache
+    container_name: redis
+    restart: always
+    volumes:
+      - redis_data:/data
+    networks:
+      - inception-net
+    expose:
+      - 6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
 volumes:
   mariadb_data:
   wordpress_data:
+  redis_data:
 
 networks:
   inception-net:

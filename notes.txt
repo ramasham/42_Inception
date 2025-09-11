@@ -210,4 +210,26 @@ command : docker run -d -p 80:80 myn
 1. PHP-FPM (PHP FastCGI process manager):
     - It’s a way to run PHP scripts on a web server efficiently, especially for high-traffic sites
 
+##redis cache:
+    # What is cache memory?
+        -  a type of computer memory for temporary storage of important, frequently accessed information
+        - Reading from and writing to cache memory is much faster than other forms of data storage
 
+    # How does cache memory work?
+        - Cache memory sits between the CPU and main memory,
+        1. an application first checks the cache to see if the information is already present there
+        2. If it is, the application simply reads the data from the cache
+        3. Otherwise, the application retrieves the data from its original source
+        4. and then stores a copy of this data in the cache for possible future access
+
+    #issues:
+        1. Only a small amount of data can be stored in cache memory, due to the cache's limited size
+            In order to make room for new information, caches need a replacement policy that defines how to remove
+            the least "useful" information in cache memory
+            
+        2. issue of "stale" data that remains in the cache:
+            "stale data" --> data that is still in cache but is no longer
+            up-to-date with the orginal source.
+            -One possible solution for stale data is a definite "expiration date" that requires scheduled refreshes for information in cache memory.
+
+        3. 

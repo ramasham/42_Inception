@@ -1,8 +1,8 @@
 FROM debian:bullseye
 
-# Install MariaDB server and required tools
-RUN apt-get update && \
-    apt-get install -y mariadb-server mariadb-client && \
+# Install MariaDB server and required tools with time validation disabled
+RUN apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update && \
+    apt-get install -y --no-install-recommends mariadb-server mariadb-client && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Copy custom MariaDB configuration

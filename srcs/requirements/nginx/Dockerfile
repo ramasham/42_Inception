@@ -3,9 +3,9 @@ FROM debian:bullseye
 # Avoid interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install NGINX, OpenSSL, and curl
-RUN apt-get update && \
-    apt-get install -y nginx openssl curl && \
+# Install NGINX, OpenSSL, and curl with time validation disabled
+RUN apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update && \
+    apt-get install -y --no-install-recommends nginx openssl curl && \
     rm -rf /var/lib/apt/lists/*
     
 # Create directory for SSL
