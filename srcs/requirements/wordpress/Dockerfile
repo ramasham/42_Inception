@@ -16,8 +16,8 @@ RUN apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false upd
 # Create working directory
 WORKDIR /var/www/html
 
-# Copy the entrypoint script
-COPY wp-entrypoint.sh /wp-entrypoint.sh
+# Copy the entrypoint script from tools directory
+COPY tools/wp-entrypoint.sh /wp-entrypoint.sh
 RUN chmod +x /wp-entrypoint.sh
 
 # Expose PHP-FPM port

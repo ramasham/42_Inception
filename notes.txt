@@ -232,4 +232,66 @@ command : docker run -d -p 80:80 myn
             up-to-date with the orginal source.
             -One possible solution for stale data is a definite "expiration date" that requires scheduled refreshes for information in cache memory.
 
-        3. 
+##FTP (File Transfer Protocol):
+    -  is a standard network protocol used for the transfer of files from one host to another over a TCP-based network
+
+    #FTP command channel and data channel:
+        - Every FTP connection consists of
+            1. command channel
+            2. data channel
+        - FTP commands and command responses go through the command channel
+        - while the data or file transfers themselves pass through the data channel.
+
+        - Your FTP server normally accepts command requests on TCP port number 21. Unless you configure it differently
+        - an FTP command channel will use port 21 on the (server side)
+        - As for the data channel, the server port number will depend on the data connection mode used
+            - in active mode:
+                - the server port number for the data channel is usually port 20
+                - In passive mode, this would be a random port number.
+    
+    #What is active mode FTP?
+        - Older versions of FTP used to run on only one data connection mode
+        which we now call active mode
+
+        #Active FTP steps:
+            1. Client connects to server port 21
+                - This is the command channel (control connection).
+                - The client uses a random port on its side
+            2. Client tells server which port to use for data
+                - Sends the PORT command with a random client-side port.
+                - This port will be used later for the data channel
+            3. Server connects back to client for data
+                - Server uses port 20 to open the data channel to the client’s port from step 2.
+            4. File transfer happens
+    
+    #What is passive mode FTP?
+        - passive mode FTP is the more recent data connection mode
+    
+        #Passive FTP steps:
+            1. Client connects to server port 21:
+                - This is the command channel (control connection).
+                - The client uses a random port on its side.
+            2. Client sends PASV command:
+                - Tells the server: “I want to use passive mode for data transfer.”
+                - Server picks a random port for the data channel and tells the client.
+            3. Client initiates the data connection:
+                - Client connects from a random port to the server’s chosen data port.
+                - Unlike active mode, the client initiates the data connection
+            4. File transfer happens
+
+    #Client-side firewalls:
+        - A client-side firewall is the one running on the user’s computer.
+        - Firewalls usually allow outbound connections (connections the client starts) but block inbound
+         onnections (connections that come to the client from the outside).
+        - FTP command channel (port 21):
+            . When the FTP client connects to the server’s port 21, this is outbound from the client.
+            . So, client-side firewalls usually allow it. No problem here.
+        - FTP data channel:
+            . In active mode FTP, the server tries to connect back to the client to send data.
+            . From the firewall’s perspective, this is an inbound connection, which may get blocked.
+            . esult: file transfers fail even though login works.
+        - Passive mode FTP:
+            . Both the command channel and the data channel are initiated by the client.
+            . From the firewall’s perspective, all connections are outbound.
+            . Result: passive mode usually works better with client-side firewalls.
+

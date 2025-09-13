@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y redis-server && \
 RUN mkdir -p /data && chown redis:redis /data
 
 # Copy redis config
-COPY redis.conf /etc/redis.conf
+COPY conf/redis.conf /etc/redis.conf
 
 # Expose default port
 EXPOSE 6379

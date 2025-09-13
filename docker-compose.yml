@@ -92,6 +92,29 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+  ftp:
+    build: ./srcs/requirements/bonus/ftp_server
+    container_name: ftp
+    restart: always
+    environment:
+      FTP_USR: ${FTP_USR}
+      FTP_PWD: ${FTP_PWD}
+    ports:
+      - 21:21
+      - 21000-21010:21000-21010
+    volumes:
+      - wordpress_data:/var/www/html
+     
+  adminer:
+    build: ./srcs/requirements/bonus/adminer
+    container_name: adminer
+    networks:
+      - inception-net
+    depends_on:
+      - mariadb
+    ports:
+      - 8080:8080
+    restart: always
 
 volumes:
   mariadb_data:
