@@ -1,2 +1,6 @@
 to open adminer
 http://rsham.42.fr:8080/adminer.php
+
+to open my html
+http://rsham.42.fr:8888
+http://localhost:8888
