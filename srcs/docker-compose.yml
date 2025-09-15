@@ -1,15 +1,3 @@
-#health check:
-  #Exec form is preferred because it avoids shell parsing issues
-  #test: ["CMD", "curl", "-k", "-f", "https://localhost/"]
-    #test: the health check command , dokcer runs to see 
-    #if the container is healthy
-    #CMD: tells docker:
-      #1. Run the command inside the container
-      #2. Don’t use a shell (/bin/sh) unless you specifically call it.
-      
-#wordpress_data is a Docker volume created for WordPress files.
-#/var/www/html is the folder inside the Nginx container where it expects website files.
-#it connects Nginx’s /var/www/html directly to the existing WordPress volume.
 services:
   nginx:
     build: ./requirements/nginx
@@ -20,7 +8,7 @@ services:
       - cadvisor
     ports:
       - "443:443"
-      - "8443:8443"  # HTTPS port for website
+      - "8443:8443"
     volumes:
       - ./requirements/nginx/ssl:/etc/nginx/ssl
       - wordpress_data:/var/www/html
