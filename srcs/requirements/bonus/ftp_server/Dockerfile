@@ -11,3 +11,4 @@ COPY conf/vsftpd.conf /tmp/vsftpd.conf
 COPY tools/configure.sh /tmp/configure.sh
 
 ENTRYPOINT ["sh", "/tmp/configure.sh"]
+CMD ["/usr/sbin/vsftpd", "/etc/vsftpd/vsftpd.conf"]

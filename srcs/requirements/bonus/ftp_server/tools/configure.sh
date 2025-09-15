@@ -3,6 +3,7 @@
 # Create necessary directories
 mkdir -p /etc/vsftpd
 mkdir -p /var/www/html
+mkdir -p /var/run/vsftpd/empty
 
 # Check if config already exists, if not create it
 if [ ! -f "/etc/vsftpd/vsftpd.conf" ]; then
@@ -28,4 +29,4 @@ echo "$FTP_USR" > /etc/vsftpd.userlist
 echo "Added $FTP_USR to vsftpd.userlist"
 
 echo "FTP server starting on port 21..."
-exec /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
+exec "$@"
