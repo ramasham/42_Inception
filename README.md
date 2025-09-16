@@ -1,11 +1,12 @@
-<p align="center">
+<div align="center">
   <h1>🐳 Inception</h1>
-
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white">
-  <img src="https://img.shields.io/badge/42-000000?style=flat-square&logo=42&logoColor=white">
-  <img src="https://img.shields.io/badge/Status-Completed-success?style=flat-square">
-  <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square">
-</p>
+  <strong>A 42 School containerization project</strong>
+  <br><br>
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white" alt="Nginx">
+  <img src="https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=mariadb&logoColor=white" alt="MariaDB">
+  <img src="https://img.shields.io/badge/HTTPS-007ACC?style=flat-square" alt="HTTPS">
+</div>
 
 ---
 
