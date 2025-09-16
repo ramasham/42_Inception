@@ -5,52 +5,54 @@
 ![Status](https://img.shields.io/badge/Status-Completed-success?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
+---
+
 ## 📌 Project Overview
-Inception is a **42 School project** that introduces you to **system administration** and **containerization**.  
-The goal is to set up a small infrastructure composed of multiple **Docker containers**, orchestrated with **docker-compose**, while building each service from scratch (no pre-built images except `debian`/`alpine`).
+**Inception** is a **42 School project** focused on **system administration** and **containerization**.  
+It sets up a small infrastructure of **Docker containers** orchestrated with **docker-compose**, building each service from scratch (base images: `debian`/`alpine`).
 
 ---
 
-## ⚙️ Mandatory Services
+## ⚙️ Core Services
 
 ### 🌐 Nginx
-- Acts as a **reverse proxy** between the outside world and internal services.  
-- Configured with **TLS/SSL certificates** to ensure secure HTTPS connections.  
-- Serves WordPress and other web content securely.  
+- Reverse proxy routing external traffic to services.  
+- Configured with **TLS/SSL** for HTTPS.  
+- Serves WordPress and static websites securely.  
 
-### 📝 WordPress (with PHP-FPM)
-- A popular **Content Management System (CMS)** used to build and manage websites.  
-- Runs on **PHP-FPM (FastCGI Process Manager)** for optimized PHP execution.  
-- Files are stored in a **persistent volume** so data is not lost when the container restarts.  
+### 📝 WordPress (PHP-FPM)
+- Popular **CMS** for website management.  
+- Runs with **PHP-FPM** for optimized PHP execution.  
+- Uses **persistent volumes** to preserve files across restarts.  
 
 ### 🗄️ MariaDB
-- A relational **database management system** forked from MySQL.  
-- Stores WordPress user data, posts, settings, and configurations.  
-- Data is saved in a **persistent volume** for reliability.  
+- Relational **database system** (MySQL fork).  
+- Stores WordPress content and user data.  
+- Data persisted in dedicated volumes.
 
 ---
 
 ## 🔥 Bonus Services
 
-### ⚡ Redis Cache
-- An **in-memory key-value store** used to cache WordPress queries.  
-- Improves website performance by reducing database load.  
+### ⚡ Redis
+- **In-memory key-value store** for caching.  
+- Reduces database load and improves performance.  
 
 ### 📂 FTP Server
-- Provides **remote access** to WordPress files.  
-- Allows developers to upload, download, and manage files securely.  
+- Provides secure **file access** to WordPress files.  
 
 ### 🛠 Adminer
-- A lightweight **database management tool**.  
-- Provides a simple **web-based interface** to interact with MariaDB.  
+- Lightweight web-based **database management tool**.  
 
 ### 📊 cAdvisor
-- **Container monitoring tool** developed by Google.  
-- Tracks container **CPU, memory, network, and disk usage** in real time.  
+- Real-time **container monitoring** tool.  
+- Tracks CPU, memory, network, and disk usage.  
 
 ### 🌍 Custom Website
-- A **static website** hosted alongside WordPress.  
-- Demonstrates hosting multiple services under the same infrastructure.
+- **Static website** hosted alongside WordPress.  
+- Demonstrates multiple service hosting.
+
+---
 
 ## 🛠️ Tech Stack
 <img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg" width="30"> Docker  
@@ -58,4 +60,5 @@ The goal is to set up a small infrastructure composed of multiple **Docker conta
 <img src="https://www.vectorlogo.zone/logos/wordpress/wordpress-icon.svg" width="30"> WordPress  
 <img src="https://www.vectorlogo.zone/logos/mysql/mysql-icon.svg" width="30"> MariaDB  
 <img src="https://www.vectorlogo.zone/logos/redis/redis-icon.svg" width="30"> Redis  
-<img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" width="30"> cAdvisor  
+<img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" width="30"> cAdvisor
+
