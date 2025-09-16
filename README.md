@@ -50,4 +50,12 @@ The goal is to set up a small infrastructure composed of multiple **Docker conta
 
 ### 🌍 Custom Website
 - A **static website** hosted alongside WordPress.  
-- Demonstrates hosting multiple services under the same infrastructure.  
+- Demonstrates hosting multiple services under the same infrastructure.
+
+## 🛠️ Tech Stack
+<img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg" width="30"> Docker  
+<img src="https://www.vectorlogo.zone/logos/nginx/nginx-icon.svg" width="30"> Nginx  
+<img src="https://www.vectorlogo.zone/logos/wordpress/wordpress-icon.svg" width="30"> WordPress  
+<img src="https://www.vectorlogo.zone/logos/mysql/mysql-icon.svg" width="30"> MariaDB  
+<img src="https://www.vectorlogo.zone/logos/redis/redis-icon.svg" width="30"> Redis  
+<img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" width="30"> cAdvisor  
