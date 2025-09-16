@@ -1,9 +1,9 @@
 # 🐳 Inception
 
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![42 Project](https://img.shields.io/badge/42-000000?style=for-the-badge&logo=42&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![42 Project](https://img.shields.io/badge/42-000000?style=flat-square&logo=42&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Completed-success?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
 ## 📌 Project Overview
 Inception is a **42 School project** that introduces you to **system administration** and **containerization**.  
