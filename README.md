@@ -1,9 +1,11 @@
-# 🐳 Inception
+<p align="center">
+  <h1>🐳 Inception</h1>
 
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![42 Project](https://img.shields.io/badge/42-000000?style=flat-square&logo=42&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Completed-success?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/42-000000?style=flat-square&logo=42&logoColor=white">
+  <img src="https://img.shields.io/badge/Status-Completed-success?style=flat-square">
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square">
+</p>
 
 ---
 
@@ -55,10 +57,11 @@ It sets up a small infrastructure of **Docker containers** orchestrated with **d
 ---
 
 ## 🛠️ Tech Stack
-<img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg" width="30"> Docker  
-<img src="https://www.vectorlogo.zone/logos/nginx/nginx-icon.svg" width="30"> Nginx  
-<img src="https://www.vectorlogo.zone/logos/wordpress/wordpress-icon.svg" width="30"> WordPress  
-<img src="https://www.vectorlogo.zone/logos/mysql/mysql-icon.svg" width="30"> MariaDB  
-<img src="https://www.vectorlogo.zone/logos/redis/redis-icon.svg" width="30"> Redis  
-<img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" width="30"> cAdvisor
-
+<p align="center">
+  <img src="https://www.vectorlogo.zone/logos/docker/docker-icon.svg" width="40" title="Docker">
+  <img src="https://www.vectorlogo.zone/logos/nginx/nginx-icon.svg" width="40" title="Nginx">
+  <img src="https://www.vectorlogo.zone/logos/wordpress/wordpress-icon.svg" width="40" title="WordPress">
+  <img src="https://www.vectorlogo.zone/logos/mysql/mysql-icon.svg" width="40" title="MariaDB">
+  <img src="https://www.vectorlogo.zone/logos/redis/redis-icon.svg" width="40" title="Redis">
+  <img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" width="40" title="cAdvisor">
+</p>
